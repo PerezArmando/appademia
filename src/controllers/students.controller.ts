@@ -1,3 +1,6 @@
+import { graphql } from 'graphql';
+
+import studentsSchema from '@graphql/students.schema';
 import StudentsService from '@services/students.service';
 import StudentsRepository from '@repositories/students.repository';
 
@@ -16,6 +19,7 @@ export default class StudentsController {
     }
 
     public async getStudentByIdAsync(id: number) {
-        return await this._studentsRepository.getByIdAsync(id);
+        const result = await this._studentsRepository.getByIdAsync(id);
+        return await graphql(studentsSchema, '{ first_name }', result);
     }
 }
