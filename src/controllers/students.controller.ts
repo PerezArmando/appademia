@@ -1,25 +1,19 @@
 import { graphql } from 'graphql';
 
 import studentsSchema from '@graphql/students.schema';
-import IStudentsService from '@services/interfaces/istudents.service';
-import IStudentsRepository from '@repositories/interfaces/istudents.repository';
+import IStudentsControllerDependencies from '@controllers/dependencies.interfaces/istudents.controller.dependencies';
+import IStudentsRepository from '@repositories/classes.interfaces/istudents.repository';
+import IStudentsController from '@controllers/classes.interfaces/istudents.controller';
 
-interface Dependencies {
-    studentsService: IStudentsService,
-    studentsRepository: IStudentsRepository
-};
-
-export default class StudentsController {
-    private _studentsService: IStudentsService;
+export default class StudentsController implements IStudentsController {
     private _studentsRepository: IStudentsRepository;
 
-    constructor({ studentsService, studentsRepository }: Dependencies) {
-        this._studentsService = studentsService;
+    constructor({ studentsRepository }: IStudentsControllerDependencies) {
         this._studentsRepository = studentsRepository;
     }
 
-    public async getStudentByIdAsync(id: number) {
+    public async getStudentByIdAsync(id: number, query: string) {
         const result = await this._studentsRepository.getByIdAsync(id);
-        return await graphql(studentsSchema, '{ first_name }', result);
+        return await graphql(studentsSchema, query, result);
     }
 }

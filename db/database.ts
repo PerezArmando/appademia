@@ -17,11 +17,6 @@ class Database {
                 host: config.get('db.host'),
                 dialect: 'mysql'
             });
-        this.testConnection();        
-    }
-
-    private testConnection() {
-        this._sequelize.authenticate().then(() => console.log('db is running properly.'));
     }
 }
 

@@ -1,9 +1,9 @@
 import BaseRepository from '@repositories/base.repository';
-import StudentModel from '@db/models/students.model';
-import IStudentsRepository from '@repositories/interfaces/istudents.repository';
+import IStudentsRepository from '@repositories/classes.interfaces/istudents.repository';
+import Students from '@db/models/students.model';
 
 export default class StudentsRepository extends BaseRepository implements IStudentsRepository {
-    constructor() {
-        super(StudentModel);
+    constructor({ Students }: { Students: Students }) {
+        super(Students.getModel());
     }
 }
