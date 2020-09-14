@@ -16,8 +16,16 @@ export default class ClassesCategoriesRespository extends BaseRepository impleme
         this._classesCategoriesModel = ClassesCategories.getModel();
         this._classesCategoriesModel.hasMany(this._classes, { foreignKey: 'classes_categories_id' });
     }
-
+    
     public async getCategoriesAndClassesAsync() {
         return await this._classesCategoriesModel.findAll({ include: this._classes });
+    }
+    public async getCategoryAndClassesByIdAsync(id: number) {
+        return await this._classesCategoriesModel.findOne(
+            {
+                where: { id },
+                include: this._classes
+            }
+        );
     }
 }

@@ -6,7 +6,12 @@ import IClassesCategoriesController from '@controllers/classes.interfaces/iclass
 const router = express.Router();
 const classesCategoriesController: IClassesCategoriesController = diContainer.resolve('classesCategoriesController');
 
-router.post('/', async (req, res) =>
-    res.json(await classesCategoriesController.getCategoriesAndClassesAsync(req.body.query)));
+router.post('/', async (req, res) => {
+    if (req.body.id) {
+        res.json(await classesCategoriesController.getCategoriesAndClassesByIdAsync(req.body.id, req.body.query));
+    } else {
+        res.json(await classesCategoriesController.getCategoriesAndClassesAsync(req.body.query));
+    }
+});
 
 export default router;

@@ -20,4 +20,20 @@ const classesCategoriesSchema = buildSchema(
     `
 );
 
-export default classesCategoriesSchema;
+const classCategorySchema = buildSchema(
+    `
+        type Classes {
+            id: ID
+            identifier: String
+            className: String
+        }
+
+        type Query {
+            id: ID
+            ccName: String,
+            Classes: [Classes]
+        }
+    `
+);
+
+export { classCategorySchema, classesCategoriesSchema };
