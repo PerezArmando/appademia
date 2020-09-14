@@ -9,9 +9,9 @@ const dbAndModels = {
     database: awilix.asValue(db),
 
     // models
-    Students: awilix.asValue(new Students()),
-    Classes: awilix.asValue(new Classes()),
-    ClassesCategories: awilix.asValue(new ClassesCategories())
+    Students: awilix.asValue(Students),
+    Classes: awilix.asValue(Classes),
+    ClassesCategories: awilix.asValue(ClassesCategories)
 };
 
 export default dbAndModels;

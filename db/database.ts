@@ -9,6 +9,7 @@ class Database {
     }
 
     constructor() {
+        console.log('SOMETHING COOL!!!');
         this._sequelize = new Sequelize(
             config.get('db.database'),
             config.get('db.username'),

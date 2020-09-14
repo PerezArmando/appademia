@@ -1,19 +1,19 @@
+import { ModelCtor } from 'sequelize/types';
+
 import BaseRepository from '@repositories/base.repository';
 import IClassesCategoriesRepository from '@repositories/classes.interfaces/iclasses.categories.repository'
-import ClassesCategories from '@db/models/classes.categories.model';
-import Classes from '@db/models/classes.model';
 
 export default class ClassesCategoriesRespository extends BaseRepository implements IClassesCategoriesRepository {
     private _classesCategoriesModel: any;
     private _classes: any;
     
-    constructor({ ClassesCategories, Classes }: { ClassesCategories: ClassesCategories, Classes: Classes }) {
-        super(ClassesCategories.getModel());
+    constructor({ ClassesCategories, Classes }: { ClassesCategories: ModelCtor<any>, Classes: ModelCtor<any> }) {
+        super(ClassesCategories);
 
-        this._classes = Classes.getModel();
+        this._classes = Classes;
 
         // model relationships.
-        this._classesCategoriesModel = ClassesCategories.getModel();
+        this._classesCategoriesModel = ClassesCategories;
         this._classesCategoriesModel.hasMany(this._classes, { foreignKey: 'classes_categories_id' });
     }
     
